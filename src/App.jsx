@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import ResearchExtras from "./Extras.jsx";
 
 const gs = (q) => `https://scholar.google.com/scholar?q=${encodeURIComponent(q)}`;
 const IMG = import.meta.env.BASE_URL; // /pauladigun-site/ on GitHub Pages
@@ -15,6 +16,17 @@ const publications = [
 
 const metrics = { citations: 235, hIndex: 9, i10Index: 8 };
 
+function copyBib(p) {
+  var authors = (p.authors || "").split(",").map(function (a) { a = a.trim(); return a === "et al." || a === "..." ? "others" : a; }).filter(Boolean);
+  var last = ((authors[0] || "adigun").split(" ").pop() || "adigun").toLowerCase().replace(/[^a-z]/g, "");
+  var word = (((p.title || "").toLowerCase().match(/[a-z]{5,}/) || ["paper"])[0]);
+  var doi = (p.doi || "").replace("https://doi.org/", "");
+  var lines = ["@article{" + last + (p.year || "") + word, "  title = {" + (p.title || "") + "}", "  author = {" + authors.join(" and ") + "}", "  journal = {" + (p.journal || "") + "}", "  year = {" + (p.year || "") + "}"];
+  if (doi) lines.push("  doi = {" + doi + "}");
+  var txt = lines.join(",\n") + "\n}";
+  var fallback = function () { window.prompt("Copy BibTeX:", txt); };
+  if (navigator.clipboard) navigator.clipboard.writeText(txt).then(function () { alert("BibTeX copied to clipboard"); }, fallback); else fallback();
+}
 function livePubs(sch) {
   var live = sch && sch.publications;
   if (!live || !live.length) return publications;
@@ -93,7 +105,7 @@ const researchAreas = [
 
 const cvData = {
   education: [{ degree: "Ph.D.", field: "Engineering Mechanics and Energy", institution: "University of Tsukuba, Japan", period: "2026", details: "Physics-constrained machine learning for climate model bias correction, with applications to solar energy, tropical cyclones and African climate extremes" }],
-  experience: [{ role: "Chancellor's Postdoctoral Fellow", org: "UCLA, Department of Atmospheric and Oceanic Sciences", period: "Incoming", details: "Postdoctoral research with Prof. Rong Fu" }, { role: "Research Associate", org: "University of Tsukuba", period: "Current", details: "Climate modeling, deep learning for bias correction, solar and wind energy projections under climate change scenarios" }],
+  experience: [{ role: "Research Associate", org: "University of Tsukuba", period: "Current", details: "Climate modeling, deep learning for bias correction, solar and wind energy projections under climate change scenarios" }],
   skills: ["CMIP6 Climate Models", "Python / R", "Deep Learning (Physics-constrained)", "Remote Sensing", "Statistical Downscaling", "GIS & Spatial Analysis", "SPEI Drought Analysis", "Scientific Writing"],
 };
 
@@ -225,6 +237,7 @@ function PubCard({ pub, i, compact }) {
         <div style={{ textAlign: "right", flexShrink: 0, minWidth: 55 }}>
           <div style={{ fontFamily: "'DM Sans'", fontWeight: 700, fontSize: 13, color: C.gold }}>{pub.year}</div>
           {pub.citations > 0 && <div style={{ fontSize: 11, color: C.textLight, fontFamily: "'DM Sans'", marginTop: 3 }}>{pub.citations} cited</div>}
+          <button type="button" onClick={function (e) { e.preventDefault(); e.stopPropagation(); copyBib(pub); }} style={{ marginTop: 6, fontFamily: "'DM Sans'", fontSize: 11, fontWeight: 700, color: C.gold, background: "none", border: "1px solid " + C.gold, borderRadius: 5, padding: "2px 8px", cursor: "pointer" }}>Copy BibTeX</button>
         </div>
       </div>
     </a>
@@ -306,6 +319,7 @@ My research integrates <span style={{ color: C.goldLight, fontWeight: 500 }}>cli
       </section>
 
       <FeaturedResearch />
+      <ResearchExtras C={C} img={IMG} pubs={LP} />
 
       <section style={{ padding: "80px 48px", background: C.cream }}>
         <div style={{ maxWidth: 1000, margin: "0 auto" }}>
@@ -402,11 +416,12 @@ function PublicationsPage() {
   var sch = useScholar();
   var LM = (sch && sch.metrics) || metrics;
   var LP = livePubs(sch);
+  var pq = useState(""), pubQ = pq[0], setPubQ = pq[1];
   var publications = sch.publications;
   var metrics = sch.metrics;
   var _a = useState(false), showAll = _a[0], setShowAll = _a[1];
   var _b = useState("year"), sortBy = _b[0], setSortBy = _b[1];
-  var sorted = LP.slice().sort(function(a, b) { return sortBy === "year" ? (b.year - a.year || b.citations - a.citations) : b.citations - a.citations; });
+  var sorted = LP.filter(function (p) { var q = pubQ.toLowerCase().trim(); return !q || ((p.title || "") + " " + (p.journal || "") + " " + (p.authors || "") + " " + (p.year || "")).toLowerCase().indexOf(q) !== -1; }).slice().sort(function(a, b) { return sortBy === "year" ? (b.year - a.year || b.citations - a.citations) : b.citations - a.citations; });
   var display = showAll ? sorted : sorted.slice(0, 10);
   return (
     <div>
@@ -425,6 +440,7 @@ function PublicationsPage() {
       <section style={{ padding: "60px 48px 100px", background: C.cream }}>
         <div style={{ maxWidth: 1000, margin: "0 auto" }}>
           <div style={{ display: "flex", justifyContent: "flex-end", gap: 8, marginBottom: 24 }}>
+            <input type="search" value={pubQ} onChange={function (e) { setPubQ(e.target.value); }} placeholder="Search publications…" aria-label="Search publications" style={{ fontFamily: "'DM Sans'", fontSize: 13, padding: "8px 12px", border: "1px solid #d9d4c5", borderRadius: 8, minWidth: 200, marginRight: 8 }} />
             {["year", "citations"].map(function(s) {
               return <button key={s} onClick={function() { setSortBy(s); }} style={{ fontFamily: "'DM Sans'", padding: "6px 18px", borderRadius: 20, border: sortBy === s ? "1.5px solid " + C.navy : "1.5px solid " + C.border, background: sortBy === s ? C.navy : "#fff", color: sortBy === s ? "#fff" : C.textMid, cursor: "pointer", fontSize: 12.5, fontWeight: 600, textTransform: "capitalize" }}>{"By " + s}</button>;
             })}
@@ -492,7 +508,7 @@ function ContactPage() {
               { label: "Google Scholar", value: "View Profile", icon: "\uD83D\uDCDA", href: "https://scholar.google.com/citations?user=7uxmezsAAAAJ&hl=en" },
               { label: "ResearchGate", value: "View Profile", icon: "\uD83D\uDD2C", href: "https://www.researchgate.net/profile/Paul-Adigun" },
               { label: "GitHub", value: "pauladigun", icon: "\uD83D\uDCBB", href: "https://github.com/pauladigun" },
-              { label: "Affiliation", value: "UCLA Atmospheric & Oceanic Sciences", icon: "\uD83C\uDFDB", href: null },
+              { label: "Affiliation", value: "University of Tsukuba", icon: "\uD83C\uDFDB", href: null },
               { label: "Location", value: "Japan", icon: "\uD83D\uDCCD", href: null },
             ].map(function(item) {
               var card = (
