@@ -118,7 +118,7 @@ function Footer({ setPage }) {
         </div>
       </div>
       <div style={{ maxWidth: 1000, margin: "28px auto 0", paddingTop: 16, borderTop: "1px solid rgba(255,255,255,0.07)", display: "flex", justifyContent: "space-between", fontSize: 12 }}>
-        <span>&copy; {new Date().getFullYear()} Paul Adigun</span><span>pauladigun.com</span>
+        <span>&copy; {new Date().getFullYear()} Paul Adigun</span><span>pauladigun.github.io/pauladigun-site</span>
       </div>
     </footer>
   );
