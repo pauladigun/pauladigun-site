@@ -30,7 +30,7 @@ function copyBib(p) {
 function livePubs(sch) {
   var live = sch && sch.publications;
   if (!live || !live.length) return publications;
-  return live.map(function (p) {
+  return live.filter(function (p) { return (p.title || "").trim(); }).map(function (p) {
     var t = (p.title || "").toLowerCase();
     var m = publications.find(function (q) { return q.title.toLowerCase() === t; });
     if (!m) return p;
@@ -169,7 +169,7 @@ function HeroSpotlight({ sch }) {
   var css = `
   .hs-card{width:100%;max-width:430px;background:rgba(10,22,44,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.12);border-radius:18px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.35);animation:hsIn .8s ease both}
   @keyframes hsIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-  .hs-media{position:relative;display:block;height:175px;background:#fff;overflow:hidden}
+  .hs-media{position:relative;display:block;height:215px;background:#fff;overflow:hidden}
   .hs-media img{width:100%;height:100%;object-fit:contain;padding:10px;box-sizing:border-box;transition:transform .6s ease}
   .hs-media:hover img{transform:scale(1.04)}
   .hs-chip{position:absolute;top:12px;left:12px;font:700 10px 'DM Sans',sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:${C.navy};background:${C.gold};padding:5px 10px;border-radius:999px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
@@ -201,17 +201,7 @@ function HeroSpotlight({ sch }) {
         <h3 className="hs-title">Climate-driven synchronization of solar extremes across Africa&rsquo;s power pools</h3>
         <p className="hs-text">Low-sunshine extremes increasingly strike Africa&rsquo;s regional power pools at the same time, putting grid resilience at risk.</p>
         <a className="hs-cta" href={NPJ} target="_blank" rel="noopener noreferrer">Read the paper <span>&rarr;</span></a>
-      </div>
-      <div className="hs-list">
-        <div className="hs-kicker">Latest publications</div>
-        {latest.map(function (p, i) {
-          return (
-            <a key={i} className="hs-item" href={href(p)} target="_blank" rel="noopener noreferrer">
-              <span className="hs-year">{p.year}</span>
-              <span className="hs-it"><span className="hs-it-t">{p.title}</span><span className="hs-it-j">{p.journal}</span></span>
-            </a>
-          );
-        })}
+        <a className="hs-cta" href="#power-pools" style={{ marginLeft: 20 }} onClick={function (e) { e.preventDefault(); var el = document.getElementById("power-pools"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>Explore the map <span>&darr;</span></a>
       </div>
     </aside>
   );
@@ -318,44 +308,20 @@ My research integrates <span style={{ color: C.goldLight, fontWeight: 500 }}>cli
         </div>
       </section>
 
-      <FeaturedResearch />
-      <ResearchExtras C={C} img={IMG} pubs={LP} />
-
-      <section style={{ padding: "80px 48px", background: C.cream }}>
-        <div style={{ maxWidth: 1000, margin: "0 auto" }}>
-          <Label>Research Highlights</Label>
-          <h2 style={{ fontFamily: "'Cormorant Garamond'", fontSize: 34, fontWeight: 700, marginBottom: 40, color: C.navy }}>Areas of Expertise</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
-            {researchAreas.slice(0, 3).map(function(a, i) {
-              return (
-                <div key={i} onClick={function() { setPage("Research"); }} style={{ padding: 28, borderRadius: 12, background: a.gradient, border: "1.5px solid " + a.color + "22", cursor: "pointer", transition: "all 0.35s", position: "relative", overflow: "hidden" }}
-                  onMouseEnter={function(e) { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 32px " + a.color + "18"; }}
-                  onMouseLeave={function(e) { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
-                >
-                  <div style={{ width: 40, height: 4, borderRadius: 2, background: a.color, marginBottom: 16, opacity: 0.7 }} />
-                  <h3 style={{ fontFamily: "'DM Sans'", fontSize: 16, fontWeight: 700, marginBottom: 8, color: C.navy }}>{a.title}</h3>
-                  <p style={{ fontSize: 13, color: C.textMid, lineHeight: 1.6, fontWeight: 300 }}>{a.desc.slice(0, 120)}...</p>
-                  <div style={{ marginTop: 14, fontSize: 12, fontFamily: "'DM Sans'", fontWeight: 600, color: a.color }}>{a.papers} publications &#8594;</div>
-                </div>
-              );
-            })}
-          </div>
-          <div style={{ textAlign: "center", marginTop: 32 }}>
-            <button onClick={function() { setPage("Research"); }} style={{ background: "none", border: "1.5px solid " + C.navy, color: C.navy, padding: "10px 24px", borderRadius: 6, cursor: "pointer", fontFamily: "'DM Sans'", fontWeight: 600, fontSize: 13.5 }}>View All Research Areas &#8594;</button>
-          </div>
-        </div>
-      </section>
+      <ResearchExtras part="top" C={C} img={IMG} pubs={LP} setPage={setPage} />
 
       <section style={{ padding: "80px 48px", background: C.warmWhite }}>
         <div style={{ maxWidth: 1000, margin: "0 auto" }}>
           <Label>Latest Work</Label>
           <h2 style={{ fontFamily: "'Cormorant Garamond'", fontSize: 34, fontWeight: 700, marginBottom: 40, color: C.navy }}>Recent Publications</h2>
-          {publications.slice(0, 5).map(function(pub, i) { return <PubCard key={i} pub={pub} i={i} compact={true} />; })}
+          {LP.slice(0, 5).map(function(pub, i) { return <PubCard key={i} pub={pub} i={i} compact={true} />; })}
           <div style={{ textAlign: "center", marginTop: 32 }}>
             <button onClick={function() { setPage("Publications"); }} style={{ background: C.navy, color: "#fff", border: "none", padding: "12px 28px", borderRadius: 6, cursor: "pointer", fontFamily: "'DM Sans'", fontWeight: 700, fontSize: 14 }}>View All Publications &#8594;</button>
           </div>
         </div>
       </section>
+
+      <ResearchExtras part="bottom" C={C} img={IMG} pubs={LP} setPage={setPage} />
     </div>
   );
 }
