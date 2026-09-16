@@ -13,7 +13,18 @@ const publications = [
   { title: "Intensifying human-driven heatwaves characteristics and heat related mortality over Africa", authors: "P Adigun, EO Abah, OD Ajileye", journal: "Environmental Research: Climate", volume: "3(1), 015007", year: 2024, citations: 15, doi: "https://doi.org/10.1088/2752-5295/ad1f41" },
 ];
 
-const metrics = { citations: 151, hIndex: 8, i10Index: 7 };
+const metrics = { citations: 235, hIndex: 9, i10Index: 8 };
+
+function livePubs(sch) {
+  var live = sch && sch.publications;
+  if (!live || !live.length) return publications;
+  return live.map(function (p) {
+    var t = (p.title || "").toLowerCase();
+    var m = publications.find(function (q) { return q.title.toLowerCase() === t; });
+    if (!m) return p;
+    return Object.assign({}, m, p, { authors: p.authors || m.authors, volume: p.volume || m.volume, doi: p.doi || m.doi, citations: p.citations || 0 });
+  });
+}
 
 // ---- live Google Scholar sync (publications + citations) ----
 const SCHOLAR_ID = "7uxmezsAAAAJ";
@@ -81,8 +92,8 @@ const researchAreas = [
 ];
 
 const cvData = {
-  education: [{ degree: "Ph.D. Candidate", field: "Climate Science / Atmospheric Sciences", institution: "University of Tsukuba, Japan", period: "Current", details: "Research on CMIP6 climate modeling, renewable energy projections, and extreme weather attribution" }],
-  experience: [{ role: "Research Associate", org: "University of Tsukuba", period: "Current", details: "Climate modeling, deep learning for bias correction, solar and wind energy projections under climate change scenarios" }],
+  education: [{ degree: "Ph.D.", field: "Engineering Mechanics and Energy", institution: "University of Tsukuba, Japan", period: "2026", details: "Physics-constrained machine learning for climate model bias correction, with applications to solar energy, tropical cyclones and African climate extremes" }],
+  experience: [{ role: "Chancellor's Postdoctoral Fellow", org: "UCLA, Department of Atmospheric and Oceanic Sciences", period: "Incoming", details: "Postdoctoral research with Prof. Rong Fu" }, { role: "Research Associate", org: "University of Tsukuba", period: "Current", details: "Climate modeling, deep learning for bias correction, solar and wind energy projections under climate change scenarios" }],
   skills: ["CMIP6 Climate Models", "Python / R", "Deep Learning (Physics-constrained)", "Remote Sensing", "Statistical Downscaling", "GIS & Spatial Analysis", "SPEI Drought Analysis", "Scientific Writing"],
 };
 
@@ -93,7 +104,7 @@ function NavBar({ page, setPage }) {
   useEffect(() => { const h = () => setScrolled(window.scrollY > 20); window.addEventListener("scroll", h); return () => window.removeEventListener("scroll", h); }, []);
   return (
     <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 999, background: scrolled ? "rgba(11,29,58,0.97)" : "transparent", backdropFilter: scrolled ? "blur(16px)" : "none", transition: "all 0.4s", padding: scrolled ? "10px 48px" : "16px 48px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-      <button onClick={() => setPage("Home")} style={{ background: "none", border: "none", cursor: "pointer", fontFamily: "'Cormorant Garamond', serif", fontWeight: 700, fontSize: 20, color: scrolled ? C.goldLight : "#fff" }}>Paul Adigun</button>
+      <button onClick={() => setPage("Home")} style={{ background: "none", border: "none", cursor: "pointer", fontFamily: "'Cormorant Garamond', serif", fontWeight: 700, fontSize: 20, color: scrolled ? C.goldLight : "#fff" }}>Paul Adigun, PhD</button>
       <div style={{ display: "flex", gap: 4 }}>
         {["Home", "Research", "Publications", "CV", "Contact"].map((p) => (
           <button key={p} onClick={() => setPage(p)} style={{ background: page === p ? (scrolled ? "rgba(200,152,46,0.15)" : "rgba(255,255,255,0.12)") : "none", border: "none", cursor: "pointer", padding: "7px 16px", borderRadius: 6, fontFamily: "'DM Sans'", fontWeight: page === p ? 600 : 400, fontSize: 13, color: page === p ? (scrolled ? C.goldLight : "#fff") : (scrolled ? "rgba(255,255,255,0.6)" : "rgba(255,255,255,0.55)") }}>{p}</button>
@@ -108,7 +119,7 @@ function Footer({ setPage }) {
     <footer style={{ background: C.navy, padding: "48px 48px 24px", color: "rgba(255,255,255,0.4)", fontFamily: "'DM Sans'" }}>
       <div style={{ maxWidth: 1000, margin: "0 auto", display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 24 }}>
         <div>
-          <div style={{ fontFamily: "'Cormorant Garamond'", fontSize: 22, fontWeight: 700, color: C.goldLight, marginBottom: 6 }}>Paul Adigun</div>
+          <div style={{ fontFamily: "'Cormorant Garamond'", fontSize: 22, fontWeight: 700, color: C.goldLight, marginBottom: 6 }}>Paul Adigun, PhD</div>
           <div style={{ fontSize: 13 }}>Climate Scientist &middot; Japan</div>
         </div>
         <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
@@ -218,6 +229,8 @@ function FeaturedResearch() {
 
 function HomePage({ setPage }) {
   var sch = useScholar();
+  var LM = (sch && sch.metrics) || metrics;
+  var LP = livePubs(sch);
   var publications = sch.publications;
   var metrics = sch.metrics;
   return (
@@ -229,7 +242,7 @@ function HomePage({ setPage }) {
         <div style={{ display: "flex", gap: 48, alignItems: "center", flexWrap: "wrap", width: "100%", maxWidth: 1160, margin: "0 auto", position: "relative", zIndex: 2 }}>
           <div style={{ flex: "1 1 520px", maxWidth: 620 }}>
             <div style={{ width: 56, height: 2, background: "linear-gradient(90deg, " + C.gold + ", transparent)", marginBottom: 28 }} />
-            <h1 style={{ fontFamily: "'Cormorant Garamond'", fontSize: 60, fontWeight: 700, lineHeight: 1.05, color: "#fff", marginBottom: 10 }}>Paul Adigun</h1>
+            <h1 style={{ fontFamily: "'Cormorant Garamond'", fontSize: 60, fontWeight: 700, lineHeight: 1.05, color: "#fff", marginBottom: 10 }}>Paul Adigun, PhD</h1>
             <p style={{ fontFamily: "'DM Sans'", fontSize: 15, fontWeight: 500, color: C.goldLight, letterSpacing: 2, marginBottom: 26, textTransform: "uppercase" }}>Climate Scientist &middot; Japan</p>
             <p style={{ fontSize: 18, lineHeight: 1.8, color: "rgba(255,255,255,0.65)", maxWidth: 600, fontWeight: 300 }}>
 My research integrates <span style={{ color: C.goldLight, fontWeight: 500 }}>climate and Earth system modeling</span>, high-resolution simulations, <span style={{ color: C.goldLight, fontWeight: 500 }}>machine learning</span>, and satellite observations to understand <span style={{ color: C.goldLight, fontWeight: 500 }}>extreme weather</span> and <span style={{ color: C.goldLight, fontWeight: 500 }}>renewable energy</span> potential across <span style={{ color: C.goldLight, fontWeight: 500 }}>Africa</span> and beyond, supporting <span style={{ color: C.goldLight, fontWeight: 500 }}>climate adaptation</span> and evidence-based policy.
@@ -239,7 +252,7 @@ My research integrates <span style={{ color: C.goldLight, fontWeight: 500 }}>cli
               <button onClick={function() { setPage("Contact"); }} style={{ background: "transparent", color: "rgba(255,255,255,0.8)", cursor: "pointer", border: "1.5px solid rgba(255,255,255,0.2)", padding: "12px 28px", borderRadius: 6, fontFamily: "'DM Sans'", fontWeight: 600, fontSize: 14 }}>Get in Touch</button>
             </div>
             <div style={{ display: "flex", marginTop: 44, background: "rgba(255,255,255,0.04)", borderRadius: 10, overflow: "hidden", border: "1px solid rgba(255,255,255,0.07)", width: "fit-content", flexWrap: "wrap" }}>
-              {[{ l: "Citations", v: metrics.citations }, { l: "h-index", v: metrics.hIndex }, { l: "i10-index", v: metrics.i10Index }, { l: "Publications", v: publications.length }].map(function(m, i) {
+              {[{ l: "Citations", v: LM.citations }, { l: "h-index", v: LM.hIndex }, { l: "i10-index", v: LM.i10Index }, { l: "Publications", v: LP.length }].map(function(m, i) {
                 return <div key={m.l} style={{ textAlign: "center", padding: "18px 28px", borderRight: i < 3 ? "1px solid rgba(255,255,255,0.06)" : "none" }}><div style={{ fontSize: 26, fontWeight: 700, color: C.goldLight, fontFamily: "'DM Sans'" }}>{m.v}</div><div style={{ fontSize: 11, color: "rgba(255,255,255,0.38)", fontFamily: "'DM Sans'", fontWeight: 500, marginTop: 3 }}>{m.l}</div></div>;
               })}
             </div>
@@ -345,11 +358,13 @@ function ResearchPage() {
 
 function PublicationsPage() {
   var sch = useScholar();
+  var LM = (sch && sch.metrics) || metrics;
+  var LP = livePubs(sch);
   var publications = sch.publications;
   var metrics = sch.metrics;
   var _a = useState(false), showAll = _a[0], setShowAll = _a[1];
   var _b = useState("year"), sortBy = _b[0], setSortBy = _b[1];
-  var sorted = publications.slice().sort(function(a, b) { return sortBy === "year" ? (b.year - a.year || b.citations - a.citations) : b.citations - a.citations; });
+  var sorted = LP.slice().sort(function(a, b) { return sortBy === "year" ? (b.year - a.year || b.citations - a.citations) : b.citations - a.citations; });
   var display = showAll ? sorted : sorted.slice(0, 10);
   return (
     <div>
@@ -359,7 +374,7 @@ function PublicationsPage() {
           <h1 style={{ fontFamily: "'Cormorant Garamond'", fontSize: 48, fontWeight: 700, color: "#fff", marginBottom: 12 }}>Selected Works</h1>
           <p style={{ fontSize: 15, color: "rgba(255,255,255,0.5)", marginBottom: 28, fontFamily: "'DM Sans'" }}>Click any paper to view it on the publisher website or Google Scholar{sch.updated ? " \u00b7 synced " + sch.updated : ""}</p>
           <div style={{ display: "flex", gap: 32 }}>
-            {[{ l: "Total Citations", v: metrics.citations }, { l: "h-index", v: metrics.hIndex }, { l: "i10-index", v: metrics.i10Index }, { l: "Publications", v: publications.length }].map(function(m) {
+            {[{ l: "Total Citations", v: LM.citations }, { l: "h-index", v: LM.hIndex }, { l: "i10-index", v: LM.i10Index }, { l: "Publications", v: LP.length }].map(function(m) {
               return <div key={m.l}><div style={{ fontSize: 28, fontWeight: 700, color: C.goldLight, fontFamily: "'DM Sans'" }}>{m.v}</div><div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", fontFamily: "'DM Sans'", marginTop: 2 }}>{m.l}</div></div>;
             })}
           </div>
@@ -435,7 +450,7 @@ function ContactPage() {
               { label: "Google Scholar", value: "View Profile", icon: "\uD83D\uDCDA", href: "https://scholar.google.com/citations?user=7uxmezsAAAAJ&hl=en" },
               { label: "ResearchGate", value: "View Profile", icon: "\uD83D\uDD2C", href: "https://www.researchgate.net/profile/Paul-Adigun" },
               { label: "GitHub", value: "pauladigun", icon: "\uD83D\uDCBB", href: "https://github.com/pauladigun" },
-              { label: "Affiliation", value: "University of Tsukuba", icon: "\uD83C\uDFDB", href: null },
+              { label: "Affiliation", value: "UCLA Atmospheric & Oceanic Sciences", icon: "\uD83C\uDFDB", href: null },
               { label: "Location", value: "Japan", icon: "\uD83D\uDCCD", href: null },
             ].map(function(item) {
               var card = (
