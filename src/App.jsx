@@ -149,17 +149,59 @@ function PageHeader({ label, title, subtitle }) {
   );
 }
 
-function HeroSpotlight({ updated }) {
+function HeroSpotlight({ sch }) {
+  var NPJ = "https://doi.org/10.1038/s44406-026-00027-7";
+  var pubs = livePubs(sch).slice().sort(function (a, b) { return (b.year || 0) - (a.year || 0) || (b.citations || 0) - (a.citations || 0); });
+  var latest = pubs.filter(function (p) { return (p.title || "").toLowerCase().indexOf("synchronization of solar extremes") === -1; }).slice(0, 3);
+  var href = function (p) { return p.doi || p.link || "https://scholar.google.com/citations?user=7uxmezsAAAAJ&hl=en"; };
+  var css = `
+  .hs-card{width:100%;max-width:430px;background:rgba(10,22,44,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.12);border-radius:18px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.35);animation:hsIn .8s ease both}
+  @keyframes hsIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .hs-media{position:relative;display:block;height:175px;background:#fff;overflow:hidden}
+  .hs-media img{width:100%;height:100%;object-fit:contain;padding:10px;box-sizing:border-box;transition:transform .6s ease}
+  .hs-media:hover img{transform:scale(1.04)}
+  .hs-chip{position:absolute;top:12px;left:12px;font:700 10px 'DM Sans',sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:${C.navy};background:${C.gold};padding:5px 10px;border-radius:999px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+  .hs-body{padding:20px 22px 18px}
+  .hs-kicker{font:700 10px 'DM Sans',sans-serif;letter-spacing:2.2px;text-transform:uppercase;color:${C.goldLight};margin-bottom:8px}
+  .hs-title{font-family:'Cormorant Garamond',serif;font-size:23px;line-height:1.2;font-weight:700;color:#fff;margin:0 0 8px}
+  .hs-text{font:400 13.5px/1.55 'DM Sans',sans-serif;color:rgba(255,255,255,.7);margin:0 0 14px}
+  .hs-cta{font:700 13px 'DM Sans',sans-serif;color:${C.goldLight};text-decoration:none}
+  .hs-cta span{display:inline-block;transition:transform .2s}
+  .hs-cta:hover span{transform:translateX(5px)}
+  .hs-list{border-top:1px solid rgba(255,255,255,.1);padding:16px 22px 16px}
+  .hs-item{display:flex;gap:12px;align-items:flex-start;padding:10px 0;text-decoration:none;border-top:1px solid rgba(255,255,255,.07)}
+  .hs-kicker + .hs-item{border-top:0}
+  .hs-year{flex:none;font:700 11px 'DM Sans',sans-serif;color:${C.gold};border:1px solid rgba(212,175,55,.45);border-radius:6px;padding:2px 7px;margin-top:1px}
+  .hs-it{display:flex;flex-direction:column;min-width:0}
+  .hs-it-t{font:600 13px/1.4 'DM Sans',sans-serif;color:#fff;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .2s}
+  .hs-item:hover .hs-it-t{color:${C.goldLight}}
+  .hs-it-j{font:400 11.5px 'DM Sans',sans-serif;color:rgba(255,255,255,.5);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  @media(max-width:860px){.hs-card{max-width:100%}}`;
   return (
-    <div style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(200,152,46,0.28)", borderRadius: 16, padding: "24px 24px 20px", backdropFilter: "blur(8px)", boxShadow: "0 18px 50px rgba(0,0,0,0.28)" }}>
-      <div style={{ fontFamily: "'DM Sans'", fontSize: 10.5, fontWeight: 700, letterSpacing: 2.5, textTransform: "uppercase", color: C.goldLight, marginBottom: 12 }}>Featured Paper &middot; 2026</div>
-      <h3 style={{ fontFamily: "'Cormorant Garamond'", fontSize: 23, fontWeight: 700, color: "#fff", lineHeight: 1.22, marginBottom: 10 }}>Climate-driven synchronization of solar extremes across Africa's power pools</h3>
-      <p style={{ fontFamily: "'DM Sans'", fontSize: 12.5, color: "rgba(255,255,255,0.55)", marginBottom: 16 }}>npj Clean Energy &mdash; Nature Portfolio</p>
-      <a href="https://doi.org/10.1038/s44406-026-00027-7" target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", fontFamily: "'DM Sans'", fontSize: 13, fontWeight: 700, color: C.navy, background: C.gold, padding: "9px 18px", borderRadius: 6, textDecoration: "none" }}>Read the paper &#8594;</a>
-      <div style={{ marginTop: 18, paddingTop: 14, borderTop: "1px solid rgba(255,255,255,0.1)", fontFamily: "'DM Sans'", fontSize: 10.5, color: "rgba(255,255,255,0.4)", lineHeight: 1.5 }}>
-        Publications &amp; citations synced from Google Scholar{updated ? " \u00b7 updated " + updated : ""}
+    <aside className="hs-card">
+      <style>{css}</style>
+      <a className="hs-media" href={NPJ} target="_blank" rel="noopener noreferrer">
+        <img src={IMG + "figures/npj-solar-extremes-fig2.webp"} alt="Photovoltaic potential across African power pools, npj Clean Energy 2026" />
+        <span className="hs-chip">New &middot; npj Clean Energy</span>
+      </a>
+      <div className="hs-body">
+        <div className="hs-kicker">Featured research &middot; 2026</div>
+        <h3 className="hs-title">Climate-driven synchronization of solar extremes across Africa&rsquo;s power pools</h3>
+        <p className="hs-text">Low-sunshine extremes increasingly strike Africa&rsquo;s regional power pools at the same time, putting grid resilience at risk.</p>
+        <a className="hs-cta" href={NPJ} target="_blank" rel="noopener noreferrer">Read the paper <span>&rarr;</span></a>
       </div>
-    </div>
+      <div className="hs-list">
+        <div className="hs-kicker">Latest publications</div>
+        {latest.map(function (p, i) {
+          return (
+            <a key={i} className="hs-item" href={href(p)} target="_blank" rel="noopener noreferrer">
+              <span className="hs-year">{p.year}</span>
+              <span className="hs-it"><span className="hs-it-t">{p.title}</span><span className="hs-it-j">{p.journal}</span></span>
+            </a>
+          );
+        })}
+      </div>
+    </aside>
   );
 }
 
@@ -258,7 +300,7 @@ My research integrates <span style={{ color: C.goldLight, fontWeight: 500 }}>cli
             </div>
           </div>
           <div style={{ flex: "1 1 320px", maxWidth: 400, minWidth: 280 }}>
-            <HeroSpotlight updated={sch.updated} />
+            <HeroSpotlight sch={sch} />
           </div>
         </div>
       </section>
