@@ -1,8 +1,8 @@
 {
-  "updated": "2026-06-22",
+  "updated": "2026-09-16",
   "metrics": {
-    "citations": 189,
-    "hIndex": 8,
+    "citations": 235,
+    "hIndex": 9,
     "i10Index": 8
   },
   "publications": [
@@ -11,24 +11,56 @@
       "authors": "",
       "journal": "Sustainable Energy Technologies and Assessments 85, 104776, 2026",
       "year": 2026,
-      "citations": 2,
+      "citations": 4,
       "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:_kc_bZDykSQC"
     },
     {
-      "title": "Climate-driven synchronization of solar extremes threatens the resilience of Africa’s regional power pool",
+      "title": "Doubled Saharan dust emissions decrease solar photovoltaic potential through dust–radiation–cloud interactions in CMIP6 simulation",
       "authors": "",
-      "journal": "npj Clean Energy 2 (1), 11, 2026",
+      "journal": "Environmental Research: Climate 5 (3), 035002, 2026",
       "year": 2026,
-      "citations": 0,
-      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:9ZlFYXVOiuMC"
+      "citations": 2,
+      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:4TOpqqG69KYC"
     },
     {
       "title": "Emergent reorganization and increased persistence of meteorological drought across Africa",
       "authors": "",
       "journal": "Communications Earth & Environment, 2026",
       "year": 2026,
-      "citations": 0,
+      "citations": 2,
       "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:mVmsd5A6BfQC"
+    },
+    {
+      "title": "Evaporative demand drought index for monitoring and analyzing drought conditions in arid regions of Asia and Africa",
+      "authors": "",
+      "journal": "Weather and Climate Extremes, 100873, 2026",
+      "year": 2026,
+      "citations": 2,
+      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:aqlVkmm33-oC"
+    },
+    {
+      "title": "Future wind energy potential for wind farm development in Africa based on bias-corrected NEX-GDDP-CMIP6 wind projections",
+      "authors": "",
+      "journal": "Cleaner Engineering and Technology, 101145, 2026",
+      "year": 2026,
+      "citations": 2,
+      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:qxL8FJ1GzNcC"
+    },
+    {
+      "title": "Climate-driven synchronization of solar extremes threatens the resilience of Africa’s regional power pool",
+      "authors": "",
+      "journal": "npj Clean Energy 2 (1), 11, 2026",
+      "year": 2026,
+      "citations": 1,
+      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:9ZlFYXVOiuMC"
+    },
+    {
+      "title": "Northward Dust-Induced Shift of Tropical Atlantic Precipitation in CMIP6 Models",
+      "authors": "",
+      "journal": "EarthArXiv, 2026",
+      "year": 2026,
+      "citations": 0,
+      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:dhFuZR0502QC"
     },
     {
       "title": "Historical and Projected Changes in Temperature–Precipitation Compound Hot and Dry Extremes across Africa Based on CMIP5 and CMIP6 Ensemble Simulations",
@@ -39,27 +71,11 @@
       "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:4DMP91E08xMC"
     },
     {
-      "title": "Evaporative demand drought index for monitoring and analyzing drought conditions in arid regions of Asia and Africa",
-      "authors": "",
-      "journal": "Weather and Climate Extremes, 100873, 2026",
-      "year": 2026,
-      "citations": 0,
-      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:aqlVkmm33-oC"
-    },
-    {
-      "title": "Future Wind Energy Potential for Wind Farm Development in Africa Based on Bias-Corrected NEX-GDDP-CMIP6 Wind Projections",
-      "authors": "",
-      "journal": "Cleaner Engineering and Technology, 101145, 2026",
-      "year": 2026,
-      "citations": 0,
-      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:qxL8FJ1GzNcC"
-    },
-    {
       "title": "Spatiotemporal analysis of drought patterns and trends across Africa: a multi-scale SPEI approach (1960–2018)",
       "authors": "",
       "journal": "International Journal of Digital Earth 18 (1), 2447342, 2025",
       "year": 2025,
-      "citations": 22,
+      "citations": 33,
       "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:0EnyYjriUFMC"
     },
     {
@@ -67,16 +83,32 @@
       "authors": "",
       "journal": "Solar Energy 285, 113078, 2025",
       "year": 2025,
-      "citations": 16,
+      "citations": 19,
       "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:hqOjcs7Dif8C"
+    },
+    {
+      "title": "Climate change influence on solar photovoltaic energy production and its associated drivers in CMIP6 ensemble projections",
+      "authors": "",
+      "journal": "Journal of Geophysical Research: Atmospheres 130 (18), e2024JD042971, 2025",
+      "year": 2025,
+      "citations": 9,
+      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:3fE2CSJIrl8C"
     },
     {
       "title": "Physics-constrained Deep Learning Bias Correction of CMIP6 Solar Radiation Over Africa and Its Implications for Solar Power Planning in a Changing Climate.",
       "authors": "",
       "journal": "Renewable Energy, 124658, 2025",
       "year": 2025,
-      "citations": 6,
+      "citations": 7,
       "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:KlAtU1dfN6UC"
+    },
+    {
+      "title": "Probabilistic quantification of global drought risk amplification from temperature-enhanced evapotranspiration under climate change",
+      "authors": "",
+      "journal": "Geoscience Frontiers, 102235, 2025",
+      "year": 2025,
+      "citations": 6,
+      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:ULOm3_A8WrAC"
     },
     {
       "title": "DEEP learning downscaling of West Africa summer monsoon precipitation flow: exploring added value",
@@ -87,36 +119,20 @@
       "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:kNdYIx-mwKoC"
     },
     {
-      "title": "Climate change influence on solar photovoltaic energy production and its associated drivers in CMIP6 ensemble projections",
-      "authors": "",
-      "journal": "Journal of Geophysical Research: Atmospheres 130 (18), e2024JD042971, 2025",
-      "year": 2025,
-      "citations": 4,
-      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:3fE2CSJIrl8C"
-    },
-    {
-      "title": "Probabilistic quantification of global drought risk amplification from temperature-enhanced evapotranspiration under climate change",
-      "authors": "",
-      "journal": "Geoscience Frontiers, 102235, 2025",
-      "year": 2025,
-      "citations": 2,
-      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:ULOm3_A8WrAC"
-    },
-    {
-      "title": "Doubled Saharan dust emissions decrease solar photovoltaic potential through dust-radiation-cloud interactions in CMIP6 simulation",
-      "authors": "",
-      "journal": "Environmental Research: Climate, 2025",
-      "year": 2025,
-      "citations": 1,
-      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:4TOpqqG69KYC"
-    },
-    {
       "title": "Intensifying human-driven heatwaves characteristics and heat related mortality over Africa",
       "authors": "",
       "journal": "Environmental Research: Climate 3 (1), 015007, 2024",
       "year": 2024,
-      "citations": 20,
+      "citations": 21,
       "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:ufrVoPGSRksC"
+    },
+    {
+      "title": "Multi-scale drought variability over West Africa and the associated large-scale circulation patterns",
+      "authors": "",
+      "journal": "Geomatics, Natural Hazards and Risk 15 (1), 2409199, 2024",
+      "year": 2024,
+      "citations": 13,
+      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:UebtZRa9Y70C"
     },
     {
       "title": "Assessing teleconnection influences on the spatial and temporal patterns of meteorological drought in Northwest China",
@@ -127,23 +143,15 @@
       "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:Se3iqnhoufwC"
     },
     {
-      "title": "Multi-scale drought variability over West Africa and the associated large-scale circulation patterns",
-      "authors": "",
-      "journal": "Geomatics, Natural Hazards and Risk 15 (1), 2409199, 2024",
-      "year": 2024,
-      "citations": 10,
-      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:UebtZRa9Y70C"
-    },
-    {
       "title": "Drought assessment over Northern Africa using Multi-source satellite product",
       "authors": "",
       "journal": "Remote sensing application II: A climate change perspective in agriculture …, 2024",
       "year": 2024,
-      "citations": 4,
+      "citations": 5,
       "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:roLk4NBRz8UC"
     },
     {
-      "title": "Hybrid Statistical Downscaling in Reducing Bias in Drivers of Compound Wet-Warm Extremes During the West African Summer Monsoon Season",
+      "title": "Hybrid statistical downscaling in reducing bias in drivers of compound wet-warm extremes during the West African Summer Monsoon Season",
       "authors": "",
       "journal": "International conference on Mediterranean Geosciences Union, 117-121, 2023",
       "year": 2023,
@@ -155,7 +163,7 @@
       "authors": "",
       "journal": "Current Research in Environmental Sustainability 4, 100142, 2022",
       "year": 2022,
-      "citations": 40,
+      "citations": 41,
       "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:2osOgNQ5qMEC"
     },
     {
@@ -163,7 +171,7 @@
       "authors": "",
       "journal": "Modeling Earth Systems and Environment 8 (4), 4749-4763, 2022",
       "year": 2022,
-      "citations": 19,
+      "citations": 22,
       "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:qjMakFHDy7sC"
     },
     {
@@ -191,6 +199,14 @@
       "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:YOwf2qJgpHMC"
     },
     {
+      "title": "Deep Learning Detection of COVID-19, Temporal Variation and its Link with Temperature in Nigeria",
+      "authors": "",
+      "journal": "Fall Meeting 2022, 2022",
+      "year": 2022,
+      "citations": 0,
+      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:QIV2ME_5wuYC"
+    },
+    {
       "title": "Dynamic and Thermodynamic component controlling Anthropogenic signal attributed to Extreme precipitation over east Asia in CMIP6 model simulation",
       "authors": "",
       "journal": "AGU Fall Meeting Abstracts 2022, A41A-03, 2022",
@@ -203,7 +219,7 @@
       "authors": "",
       "journal": "Asian Journal of Research in Computer Science 3 (4), 1-10, 2019",
       "year": 2019,
-      "citations": 19,
+      "citations": 22,
       "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7uxmezsAAAAJ&citation_for_view=7uxmezsAAAAJ:IjCSPb-OGe4C"
     },
     {
