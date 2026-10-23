@@ -208,7 +208,21 @@ function CtaBand() {
 
 /* ---------------- Home ---------------- */
 function Home({ pubs }) {
-  const recent = pubs.filter((p) => questionOf(p) && p.type === "Journal article").slice(0, 9);
+  const ORDER = [
+    "10.1038/s44406-026-00027-7", // synchronised solar extremes, npj Clean Energy
+    "10.1038/s43247-026-03528-6", // emergent reorganisation of drought, Comms Earth & Environment
+    "10.1016/j.seta.2025.104776", // extreme weather and cascading PV vulnerabilities
+    "10.1016/j.solener.2024.113078", // future of PV potential in Africa
+    "10.1016/j.gsf.2025.102235", // global drought risk amplification
+    "10.1016/j.renene.2025.124658", // PhysConDL
+    "10.1088/2752-5295/ae2ef3", // doubled Saharan dust
+    "10.1088/2752-5295/ad1f41", // heatwaves and mortality
+    "10.1029/2024JD042971", // PV drivers, JGR
+    "10.1016/j.clet.2026.101145", // wind potential
+  ];
+  const journal = pubs.filter((p) => questionOf(p) && p.type === "Journal article");
+  const picked = ORDER.map((d) => journal.find((p) => doiKey(p) === d)).filter(Boolean);
+  const recent = [...picked, ...journal.filter((p) => !picked.includes(p))].slice(0, 12);
   const news = NEWS.slice(0, 6);
   return (
     <>

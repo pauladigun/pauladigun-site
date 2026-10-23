@@ -20,9 +20,9 @@ export const FIGURES = {
     caption: "Figure 2. Where extreme weather compounds photovoltaic power vulnerabilities under climate change.",
   },
   "10.1016/j.solener.2024.113078": {
-    file: "pv-potential-fig2.jpg",
-    url: "https://ars.els-cdn.com/content/image/1-s2.0-S0038092X24007734-gr2_lrg.jpg",
-    caption: "Figure 2. Projected change in photovoltaic potential across Africa in the CMIP6 multi-model ensemble under higher-emission scenarios.",
+    file: "pv-potential-fig10.jpg",
+    url: "https://ars.els-cdn.com/content/image/1-s2.0-S0038092X24007734-gr10_lrg.jpg",
+    caption: "Figure 10. The future of photovoltaic energy potential across Africa under higher-emission scenarios in the CMIP6 multi-model ensemble.",
   },
   "10.1016/j.wace.2026.100873": {
     file: "eddi-fig2.jpg",
@@ -35,9 +35,9 @@ export const FIGURES = {
     caption: "Figure 8. Future wind energy potential for wind farm development across Africa from bias-corrected NEX-GDDP-CMIP6 projections.",
   },
   "10.1016/j.gsf.2025.102235": {
-    file: "global-drought-risk-fig2.jpg",
-    url: "https://ars.els-cdn.com/content/image/1-s2.0-S1674987125002403-gr2_lrg.jpg",
-    caption: "Figure 2. Global amplification of drought risk from temperature-enhanced evapotranspiration under climate change.",
+    file: "global-drought-risk-ga.jpg",
+    url: "https://ars.els-cdn.com/content/image/1-s2.0-S1674987125002403-ga1_lrg.jpg",
+    caption: "Graphical abstract. Probabilistic quantification of how temperature-enhanced evapotranspiration amplifies global drought risk under climate change.",
   },
   "10.1016/j.renene.2025.124658": {
     file: "physcondl-fig1.jpg",
