@@ -6,6 +6,7 @@ import { AREAS, areaOf } from "./areas.js";
 import { IMAGES } from "./images.js";
 import { NEWS } from "./news.js";
 import { useScholar, bibtex, doiKey } from "./scholar.js";
+import { figureFor } from "./figures.js";
 import { QUESTIONS, questionOf } from "./programme.js";
 import { ResearchMap } from "./ResearchMap.jsx";
 
@@ -33,9 +34,15 @@ function Photo({ id, className, eager }) {
   const im = IMAGES[id];
   const [src, setSrc] = useState(BASE + "images/" + im.file);
   return (
-    <img className={className} src={src} alt={im.alt} loading={eager ? "eager" : "lazy"} decoding="async"
+    <img className={className} src={src} alt={im.alt} loading={eager ? "eager" : "lazy"} decoding="async" style={im.position ? { objectPosition: im.position } : undefined}
       onError={() => { if (src !== im.url) setSrc(im.url); }} />
   );
+}
+
+/* ---------------- Figure from a paper: local file first, then the publisher ---------------- */
+function Figure({ fig, className }) {
+  const [src, setSrc] = useState(BASE + "figures/" + fig.file);
+  return <img className={className} src={src} alt={fig.caption} loading="lazy" decoding="async" onError={() => { if (src !== fig.url) setSrc(fig.url); }} />;
 }
 
 /* ---------------- Header ---------------- */
@@ -92,7 +99,7 @@ function Header({ page }) {
 const SLIDES = [
   { image: "solar", kicker: "Featured research", title: "Africa's power pools could fail together as the climate warms", text: "Under high emissions, the West and Central African pools each face more than 100 synchronised low-output days a year.", link: href("area", "solar-and-wind-energy"), cta: "Read about the work" },
   { image: "lakechad", kicker: "Featured research", title: "African drought is reorganising, not only intensifying", text: "Frequency, duration and severity are rising together, driven largely by evaporative demand, and becoming more tightly coupled.", link: href("area", "drought-and-water"), cta: "Read about the work" },
-  { image: "heat", kicker: "Featured research", title: "Heat-related deaths in Africa could almost quintuple this century", text: "Human-driven heatwaves are intensifying, with projected mortality rising from about 9,000 to as many as 43,000 deaths a year.", link: href("area", "heat-and-compound-extremes"), cta: "Read about the work" },
+  { image: "rain", kicker: "Featured research", title: "Heat-related deaths in Africa could almost quintuple this century", text: "Human-driven heatwaves are intensifying, with projected mortality rising from about 9,000 to as many as 43,000 deaths a year.", link: href("area", "heat-and-compound-extremes"), cta: "Read about the work" },
 ];
 
 function Hero() {
@@ -159,9 +166,11 @@ function areaForPub(p) {
   return AREAS.find((a) => (k && a.dois.includes(k)) || a.keys.some((w) => t.includes(w)));
 }
 function PubCard({ p, kicker = "Research", photo }) {
-  const a = photo ? areaForPub(p) : null;
+  const fig = photo ? figureFor(doiKey(p)) : null;
+  const a = photo && !fig ? areaForPub(p) : null;
   return (
-    <article className={"pub-card" + (a ? " has-photo" : "")}>
+    <article className={"pub-card" + (fig || a ? " has-photo" : "")}>
+      {fig && <Figure fig={fig} className="pub-fig" />}
       {a && <Photo id={a.image} className="pub-photo" />}
       <p className="kicker">{kicker}</p>
       <h3><a href={p.doi || p.link || SCHOLAR_URL} target="_blank" rel="noopener noreferrer">{p.title}</a></h3>
@@ -307,6 +316,9 @@ function Area({ id, pubs }) {
     return !(questionOf(p) === null) && a.keys.some((w) => t.includes(w));
   });
   const feat = a.featured ? pubs.find((p) => doiKey(p) === a.featured) : null;
+  const featFig = a.featured ? figureFor(a.featured) : null;
+  const pair = a.dois.map((d) => [d, figureFor(d)]).filter(([, f]) => f).slice(0, 2);
+  const news = NEWS.filter((n) => n.area === a.id);
   return (
     <>
       <PageHead title={a.title} intro={a.lede} image={a.image} kicker="Area of focus" />
@@ -315,13 +327,24 @@ function Area({ id, pubs }) {
           <div className="prose">
             <p>{a.body[0]}</p>
             <blockquote className="callout">{a.callout}</blockquote>
-            {a.body.slice(1).map((t, k) => <p key={k}>{t}</p>)}
+            <p>{a.body[1]}</p>
+            {pair.length > 0 && (
+              <div className={"fig-pair" + (pair.length === 1 ? " single" : "")}>
+                {pair.map(([d, f]) => (
+                  <figure key={d}>
+                    <a href={"https://doi.org/" + d} target="_blank" rel="noopener noreferrer"><Figure fig={f} className="pair-fig" /></a>
+                    <figcaption>{f.caption}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            )}
+            {a.body.slice(2).map((t, k) => <p key={k}>{t}</p>)}
           </div>
           <aside className="area-side">
             {feat && (
               <div className="feat-card">
                 <p className="kicker">Featured research</p>
-                <Photo id={a.image} className="feat-photo" />
+                {featFig ? <Figure fig={featFig} className="feat-fig" /> : <Photo id={a.image} className="feat-photo" />}
                 <h3><a href={feat.doi} target="_blank" rel="noopener noreferrer">{feat.title}</a></h3>
                 <p className="meta">{feat.journal} / {feat.year}</p>
                 <a className="btn btn-small" href={feat.doi} target="_blank" rel="noopener noreferrer">View research</a>
@@ -340,6 +363,14 @@ function Area({ id, pubs }) {
           <div className="wrap">
             <SectionHead title="Research in this area" link={href("research")} label="All publications" />
             <Carousel label="research">{mine.map((p) => <PubCard key={p.title} p={p} />)}</Carousel>
+          </div>
+        </section>
+      )}
+      {news.length > 0 && (
+        <section className="band">
+          <div className="wrap">
+            <SectionHead title="News in this area" link={href("news")} label="All news" />
+            <Carousel label="news">{news.map((n) => <NewsCard key={n.title} n={n} />)}</Carousel>
           </div>
         </section>
       )}
