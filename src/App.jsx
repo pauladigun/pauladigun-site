@@ -34,7 +34,7 @@ function Photo({ id, className, eager }) {
   const im = IMAGES[id];
   const [src, setSrc] = useState(BASE + "images/" + im.file);
   return (
-    <img className={className} src={src} alt={im.alt} loading={eager ? "eager" : "lazy"} decoding="async" style={im.position ? { objectPosition: im.position } : undefined}
+    <img className={className} src={src} alt={im.alt} loading={eager ? "eager" : "lazy"} decoding="async" style={im.crop === "left" ? { width: "200%", maxWidth: "none", objectPosition: "left center" } : im.position ? { objectPosition: im.position } : undefined}
       onError={() => { if (src !== im.url) setSrc(im.url); }} />
   );
 }
@@ -97,9 +97,10 @@ function Header({ page }) {
 
 /* ---------------- Hero slider ---------------- */
 const SLIDES = [
-  { image: "solar", kicker: "Featured research", title: "Africa's power pools could fail together as the climate warms", text: "Under high emissions, the West and Central African pools each face more than 100 synchronised low-output days a year.", link: href("area", "solar-and-wind-energy"), cta: "Read about the work" },
-  { image: "lakechad", kicker: "Featured research", title: "African drought is reorganising, not only intensifying", text: "Frequency, duration and severity are rising together, driven largely by evaporative demand, and becoming more tightly coupled.", link: href("area", "drought-and-water"), cta: "Read about the work" },
-  { image: "rain", kicker: "Featured research", title: "Heat-related deaths in Africa could almost quintuple this century", text: "Human-driven heatwaves are intensifying, with projected mortality rising from about 9,000 to as many as 43,000 deaths a year.", link: href("area", "heat-and-compound-extremes"), cta: "Read about the work" },
+  { image: "aerosols", kicker: "Machine learning for climate", title: "Climate models corrected by machine learning that keeps the physics intact", text: "PhysConDL removes 70 to 85 percent of the solar-radiation bias in CMIP6 models over Africa while preserving the links between radiation, cloud and aerosol.", link: href("area", "machine-learning"), cta: "Read about the work" },
+  { image: "solar", kicker: "Renewable energy", title: "Africa's power pools could fail together as the climate warms", text: "Under high emissions, the West and Central African pools each face more than 100 synchronised low-output days a year.", link: href("area", "solar-and-wind-energy"), cta: "Read about the work" },
+  { image: "dust", kicker: "Dust and aerosols", title: "Doubling Saharan dust cuts solar potential by up to a tenth", text: "Across the Sahara and Sahel, dust and cloud interactions amplify the loss well beyond what scattering alone would cause.", link: href("area", "dust-aerosols-and-rainfall"), cta: "Read about the work" },
+  { image: "heatmap", kicker: "Heat and health", title: "Heat-related deaths in Africa could almost quintuple this century", text: "Human-driven heatwaves are intensifying, with projected mortality rising from about 9,000 to as many as 43,000 deaths a year.", link: href("area", "heat-and-compound-extremes"), cta: "Read about the work" },
 ];
 
 function Hero() {
@@ -216,7 +217,7 @@ function Home({ pubs }) {
         <div className="wrap intro-grid">
           <h2>Climate projections that planners can trust, for a continent that cannot afford to get them wrong</h2>
           <div>
-            <p>I build physics-constrained machine learning that corrects and downscales global climate models, and I use it to ask how warming reshapes Africa's renewable energy, water and heat risks. The work runs from the physics of the correction to the power pools, crops and people on the receiving end.</p>
+            <p>I build physics-constrained machine learning that corrects and downscales global climate models, and I use it to ask how warming reshapes Africa's renewable energy, water and heat risks. Machine learning is the method; every other area on this site is where it is put to work.</p>
             <div className="btn-row"><a className="btn" href={href("areas")}>Explore the areas of focus</a><a className="btn btn-ghost" href={href("about")}>About</a></div>
           </div>
         </div>

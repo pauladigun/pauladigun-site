@@ -67,6 +67,21 @@ export const IMAGES = {
     source: "https://commons.wikimedia.org/wiki/File:Bright_lightning_storms_illuminate_the_cloudy_landscape_of_western_Africa_(iss073e0816985).jpg",
     url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Bright_lightning_storms_illuminate_the_cloudy_landscape_of_western_Africa_%28iss073e0816985%29.jpg/1920px-Bright_lightning_storms_illuminate_the_cloudy_landscape_of_western_Africa_%28iss073e0816985%29.jpg",
   },
+  aerosols: {
+    file: "global-aerosols-model.jpg",
+    alt: "A high-resolution global atmospheric model simulation showing dust, sea salt, smoke and sulphate aerosols swirling around the Earth.",
+    credit: "William Putman, NASA/Goddard, public domain",
+    source: "https://commons.wikimedia.org/wiki/File:Portrait_of_Global_Aerosols.jpeg",
+    url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Portrait_of_Global_Aerosols.jpeg/1920px-Portrait_of_Global_Aerosols.jpeg",
+  },
+  heatmap: {
+    file: "heat-land-surface-temperature.jpg",
+    alt: "Copernicus Sentinel-3 land surface temperature map of southern Namibia and north-western South Africa during record heat in April 2021.",
+    credit: "European Union, Copernicus Sentinel-3 imagery",
+    source: "https://commons.wikimedia.org/wiki/File:Record-setting_temperatures_in_South_Africa,_April_2021.jpg",
+    url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Record-setting_temperatures_in_South_Africa%2C_April_2021.jpg/1920px-Record-setting_temperatures_in_South_Africa%2C_April_2021.jpg",
+    crop: "left",
+  },
   earth: {
     file: "africa-from-space.jpg",
     alt: "Africa and Europe seen from a million miles away by NASA's EPIC camera.",

@@ -4,6 +4,14 @@
 
 export const NEWS = [
   {
+    date: "2026-05-26",
+    kind: "New paper",
+    title: "Doubling Saharan dust cuts solar potential by up to a tenth across the Sahara and Sahel",
+    text: "Published in Environmental Research: Climate. Dust and cloud interactions nearly double the loss in the Sahel compared with the arid Sahara.",
+    link: "https://doi.org/10.1088/2752-5295/ae2ef3",
+    area: "dust-aerosols-and-rainfall",
+  },
+  {
     date: "2026-05-20",
     kind: "New paper",
     title: "Synchronised solar extremes threaten the resilience of Africa's regional power pools",
@@ -22,10 +30,10 @@ export const NEWS = [
   {
     date: "2025-10-01",
     kind: "New paper",
-    title: "PhysConDL: physics-constrained bias correction of CMIP6 solar radiation over Africa",
-    text: "Published in Renewable Energy. The framework corrects systematic radiation errors while keeping the relationships between radiation, cloud and aerosol intact.",
+    title: "PhysConDL: machine learning that corrects CMIP6 solar radiation without breaking the physics",
+    text: "Published in Renewable Energy. The physics-constrained deep-learning framework removes 70 to 85 percent of the bias while keeping the relationships between radiation, cloud and aerosol intact.",
     link: "https://doi.org/10.1016/j.renene.2025.124658",
-    area: "climate-projections",
+    area: "machine-learning",
   },
   {
     date: "2024-01-16",

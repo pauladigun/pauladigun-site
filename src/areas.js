@@ -6,21 +6,21 @@
 
 export const AREAS = [
   {
-    id: "climate-projections",
-    title: "Climate projections",
-    short: "Making climate-model output physically credible enough to plan with.",
-    image: "clouds",
+    id: "machine-learning",
+    title: "Machine learning for climate",
+    short: "Deep learning that respects the physics, used to correct and downscale climate models.",
+    image: "aerosols",
     lede:
-      "Global climate models carry systematic errors over Africa, and those errors pass straight into every assessment built on top of them. This work develops corrections that respect the physics rather than only fitting the data.",
+      "Global climate models carry systematic errors over Africa, and those errors pass straight into every assessment built on top of them. This work develops physics-constrained machine learning that corrects and downscales the models while keeping the physics intact, and it is the method behind every other area on this site.",
     body: [
-      "Over much of Africa the models in the CMIP6 archive misplace cloud, aerosol and radiation, so the surface solar radiation they simulate is biased before any energy or impact calculation begins. Conventional statistical corrections can bring the numbers closer to observations while breaking the physical relationships between them, which leaves projections that look better and mean less.",
-      "PhysConDL, the physics-constrained deep-learning framework at the centre of this programme, corrects CMIP6 surface solar radiation over Africa with three coupled devices: physics nudging that keeps the correction tied to the radiation balance, a spectral correction, and a physics-informed network trained against CM SAF satellite observations. Across the CMIP6 outputs it has been applied to, the framework removes between 70 and 85 percent of the bias while preserving the relationships between radiation, cloud and aerosol that downstream planning depends on.",
-      "The same philosophy runs through the downscaling work. Deep-learning downscaling of West African summer monsoon rainfall is assessed for the added value it brings over the driving model rather than for skill scores alone, hybrid statistical downscaling is used to reduce bias in the drivers of compound wet and warm extremes, and multi-model evaluations of CMIP6 extreme precipitation over East Asia and of bias-adjusted ISIMIP models over West Africa establish which models can be trusted for which purpose.",
+      "Over much of Africa the models in the CMIP6 archive misplace cloud, aerosol and radiation, so the surface solar radiation they simulate is biased before any energy or impact calculation begins. Conventional statistical corrections, and unconstrained neural networks, can bring the numbers closer to observations while breaking the physical relationships between them, which leaves projections that look better and mean less. The programme therefore treats machine learning as a physics problem: the network is free to learn where the data lead, but the loss function, the inputs and the architecture are built so that the result stays consistent with the radiation balance and with the processes that produce it.",
+      "PhysConDL, the physics-constrained deep-learning framework at the centre of this programme, corrects CMIP6 surface solar radiation over Africa with three coupled devices: physics nudging that keeps the correction tied to the radiation balance, a spectral correction, and a physics-informed network trained against CM SAF satellite observations. Across the CMIP6 outputs it has been applied to, the framework removes between 70 and 85 percent of the bias while preserving the relationships between radiation, cloud and aerosol that downstream planning depends on. The corrected fields feed directly into the solar-energy projections in the energy area.",
+      "The same approach runs through the downscaling work and the newer hazard models. Deep-learning downscaling of West African summer monsoon rainfall is assessed for the added value it brings over the driving model rather than for skill scores alone; hybrid statistical downscaling reduces bias in the drivers of compound wet and warm extremes; PhyConML applies physics-constrained learning to tropical cyclone intensity using dynamical-systems metrics; and a Fourier neural operator with physics-based losses downscales hail hazard over Japan. Multi-model evaluations of CMIP6 extreme precipitation over East Asia and of bias-adjusted ISIMIP models over West Africa establish which models can be trusted for which purpose before any learning begins.",
     ],
     callout: "A correction that improves the numbers but breaks the physics produces projections that look better and mean less.",
     featured: "10.1016/j.renene.2025.124658",
     dois: ["10.1016/j.renene.2025.124658", "10.1007/s00382-025-07865-8", "10.1007/s40808-022-01433-3"],
-    keys: ["physics-constrained", "deep learning", "downscaling", "neural network", "bias adjusted", "bias correction", "multi-model evaluation"],
+    keys: ["physics-constrained", "deep learning", "downscaling", "neural network", "machine learning", "bias adjusted", "bias correction", "multi-model evaluation"],
   },
   {
     id: "solar-and-wind-energy",
@@ -81,13 +81,13 @@ export const AREAS = [
     lede:
       "Dust and aerosols sit at the junction of the energy and water questions. They scatter sunlight, seed cloud and move the rain belts, and climate models disagree about all three.",
     body: [
-      "In CMIP6 simulations a doubling of Saharan dust emissions decreases solar photovoltaic potential through its interactions with radiation and cloud, which makes dust a first-order uncertainty for solar planning across North and West Africa. Related work in review finds a northward, dust-induced shift of tropical Atlantic precipitation in the same models, with consequences for the Sahel rainy season.",
+      "A 2026 study in Environmental Research: Climate quantifies what a doubling of Saharan dust emissions does to solar photovoltaic potential across Africa in CMIP6 models. Annual potential falls by 5 to 10 percent in the most affected parts of the Sahara and Sahel, driven by decreases in surface solar radiation of up to 20 W per square metre, and the losses peak in spring and summer when dust optical depth is highest. Separating the direct and indirect effects shows that aerosol and cloud interactions amplify the loss beyond scattering alone: arid Sahara regions lose about 2.8 percent through direct attenuation, while the more humid Sahel loses nearly twice as much, about 4.9 percent, because dust also enhances cloud formation. Across the ensemble, photovoltaic losses track dust optical depth closely, with an R-squared of 0.72, though the relationship is non-linear. Related work in review finds a northward, dust-induced shift of tropical Atlantic precipitation in the same models, with consequences for the Sahel rainy season.",
       "Further east, aerosol forcing dominates the late-summer precipitation change over East Asia's transitional climatic zone in CMIP6 simulations, and the dynamic and thermodynamic components of the anthropogenic signal in East Asian extreme precipitation have been separated to show which part of the change is circulation and which is moisture.",
       "The monsoon work connects the two regions: deep-learning downscaling of West African summer monsoon precipitation flow, hybrid statistical downscaling of the drivers of compound wet and warm extremes, and a multi-model evaluation of summer extreme precipitation over East Asia all ask the same question of the models, which is whether they reproduce the processes that deliver rain, not just the totals.",
     ],
-    callout: "Dust is a first-order uncertainty for solar planning across North and West Africa.",
-    featured: "10.1007/s00382-025-07865-8",
-    dois: ["10.1007/s00382-025-07865-8", "10.1007/s40808-022-01433-3"],
+    callout: "In the Sahel, dust costs solar nearly twice what it does in the Sahara, because it seeds cloud as well as scattering light.",
+    featured: "10.1088/2752-5295/ae2ef3",
+    dois: ["10.1088/2752-5295/ae2ef3", "10.1007/s00382-025-07865-8", "10.1007/s40808-022-01433-3"],
     keys: ["dust", "aerosol", "precipitation", "rainfall", "monsoon"],
   },
   {
