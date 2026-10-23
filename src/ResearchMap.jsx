@@ -1,23 +1,9 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import * as Icon from "./icons.jsx";
-import { QUESTIONS, questionOf, FIGURES } from "./programme.js";
+import { QUESTIONS, questionOf } from "./programme.js";
 import { SCHOLAR_URL } from "./data.js";
 
 const BASE = import.meta.env.BASE_URL;
-const doiKey = (p) => (p.doi || "").replace("https://doi.org/", "");
-
-/* A figure that hides itself if the file has not been added yet. */
-function PaperFigure({ p }) {
-  const f = FIGURES[doiKey(p)];
-  const [ok, setOk] = useState(true);
-  if (!f || !ok) return null;
-  return (
-    <figure className="map-fig">
-      <img src={BASE + "figures/" + f.file} alt={f.caption} loading="lazy" onError={() => setOk(false)} />
-      <figcaption>{f.caption}</figcaption>
-    </figure>
-  );
-}
 
 /* ---------- Research map: every paper placed on a timeline, one row per question ---------- */
 export function ResearchMap({ pubs, focus, setFocus }) {
@@ -123,7 +109,6 @@ export function ResearchMap({ pubs, focus, setFocus }) {
             <em>{active.journal}</em>, {active.year}
             {active.authors && <> · {active.authors}</>}
           </p>
-          <PaperFigure p={active} />
           <a className="text-link" href={active.doi || active.link || SCHOLAR_URL} target="_blank" rel="noopener noreferrer">
             {active.doi ? "Read at the publisher" : "View on Google Scholar"}<Icon.External width={15} height={15} />
           </a>

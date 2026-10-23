@@ -6,11 +6,10 @@ import { AREAS, areaOf } from "./areas.js";
 import { IMAGES } from "./images.js";
 import { NEWS } from "./news.js";
 import { useScholar, bibtex, doiKey } from "./scholar.js";
-import { QUESTIONS, questionOf, FIGURES, GALLERY } from "./programme.js";
+import { QUESTIONS, questionOf } from "./programme.js";
 import { ResearchMap } from "./ResearchMap.jsx";
 
 const BASE = import.meta.env.BASE_URL;
-const FIG = (f) => BASE + "figures/" + f;
 
 /* ---------------- Routing (hash based, works on GitHub Pages) ---------------- */
 function useRoute() {
@@ -154,9 +153,16 @@ function Carousel({ children, label }) {
   );
 }
 
-function PubCard({ p, kicker = "Research" }) {
+function areaForPub(p) {
+  const k = doiKey(p);
+  const t = " " + (p.title || "").toLowerCase() + " ";
+  return AREAS.find((a) => (k && a.dois.includes(k)) || a.keys.some((w) => t.includes(w)));
+}
+function PubCard({ p, kicker = "Research", photo }) {
+  const a = photo ? areaForPub(p) : null;
   return (
-    <article className="pub-card">
+    <article className={"pub-card" + (a ? " has-photo" : "")}>
+      {a && <Photo id={a.image} className="pub-photo" />}
       <p className="kicker">{kicker}</p>
       <h3><a href={p.doi || p.link || SCHOLAR_URL} target="_blank" rel="noopener noreferrer">{p.title}</a></h3>
       <p className="meta">{p.journal}{p.year && <> / {p.year}</>}</p>
@@ -192,7 +198,7 @@ function CtaBand() {
 
 /* ---------------- Home ---------------- */
 function Home({ pubs }) {
-  const recent = pubs.filter((p) => questionOf(p) && p.type !== "Conference").slice(0, 9);
+  const recent = pubs.filter((p) => questionOf(p) && p.type === "Journal article").slice(0, 9);
   const news = NEWS.slice(0, 6);
   return (
     <>
@@ -207,29 +213,11 @@ function Home({ pubs }) {
         </div>
       </section>
 
-      <section className="band band-figs">
-        <div className="wrap">
-          <SectionHead title="Figures from the papers" link={href("map")} label="See the research map" />
-          <Carousel label="figures">
-            {GALLERY.map((g) => (
-              <article key={g.file} className="fig-card">
-                <a href={"https://doi.org/" + g.doi} target="_blank" rel="noopener noreferrer"><img src={FIG(g.file)} alt={g.title} loading="lazy" /></a>
-                <div className="fig-body">
-                  <p className="kicker">{g.venue}</p>
-                  <h3><a href={"https://doi.org/" + g.doi} target="_blank" rel="noopener noreferrer">{g.title}</a></h3>
-                  <p>{g.caption}</p>
-                </div>
-              </article>
-            ))}
-          </Carousel>
-        </div>
-      </section>
-
       <section className="band band-research">
         <div className="wrap">
           <SectionHead title="Featured research" link={href("research")} label="All publications" />
           <Carousel label="research">
-            {recent.map((p) => <PubCard key={p.title} p={p} kicker="Featured research" />)}
+            {recent.map((p) => <PubCard key={p.title} p={p} kicker="Featured research" photo />)}
           </Carousel>
         </div>
       </section>
@@ -319,7 +307,6 @@ function Area({ id, pubs }) {
     return !(questionOf(p) === null) && a.keys.some((w) => t.includes(w));
   });
   const feat = a.featured ? pubs.find((p) => doiKey(p) === a.featured) : null;
-  const fig = a.featured && FIGURES[a.featured];
   return (
     <>
       <PageHead title={a.title} intro={a.lede} image={a.image} kicker="Area of focus" />
@@ -334,7 +321,7 @@ function Area({ id, pubs }) {
             {feat && (
               <div className="feat-card">
                 <p className="kicker">Featured research</p>
-                {fig && <img src={FIG(fig.file)} alt={fig.caption} loading="lazy" />}
+                <Photo id={a.image} className="feat-photo" />
                 <h3><a href={feat.doi} target="_blank" rel="noopener noreferrer">{feat.title}</a></h3>
                 <p className="meta">{feat.journal} / {feat.year}</p>
                 <a className="btn btn-small" href={feat.doi} target="_blank" rel="noopener noreferrer">View research</a>
